@@ -1,0 +1,26 @@
+
+#mainNav {
+    transition: background-color 0.3s ease-in-out, padding 0.3s ease-in-out;
+    background-color: transparent;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+#mainNav.navbar-scrolled {
+    background-color: #080694;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#mainNav .navbar-brand,
+#mainNav .navbar-nav .nav-item .nav-link {
+    color: #fff;
+    font-weight: 600;
+    transition: color 0.3s ease-in-out;
+}
+
+#mainNav.navbar-scrolled .navbar-brand,
+#mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link {
+    color: #333;
+}
