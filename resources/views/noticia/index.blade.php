@@ -1,7 +1,7 @@
 @extends('layouts.barranavegacion')
 
 <header class="baner-section">
-    <img src="assets/fondo-del-inicio.jpg" alt="Hero Image" class="baner-image">    
+    <img src="{{ asset('assets/fondo-del-inicio.jpg') }}" alt="Hero Image" class="baner-image">    
     <div class="baner-overlay"></div>
     <div class="container h-100">
         <div class="row h-100 align-items-center">
@@ -17,7 +17,9 @@
 @section('content')
 <div class="container px-5 my-5">
     <div class="d-flex align-items-center justify-content-between mb-4">
-        <a class="btn btn-primary px-4 py-3" href="{{ route('noticias.create') }}">Crear Nueva Noticia</a>
+        @auth
+            <a class="btn btn-primary px-4 py-3" href="{{ route('noticias.create') }}">Crear Nueva Noticia</a>
+        @endauth
     </div>
 
     <!-- Loop para mostrar las noticias -->
@@ -36,12 +38,14 @@
                 </div>
                 <div class="d-flex justify-content-between mt-3">
                     <a class="btn btn-sm btn-primary" href="{{ route('noticias.show', $noticia->id) }}">Ver</a>
-                    <a class="btn btn-sm btn-success" href="{{ route('noticias.edit', $noticia->id) }}">Editar</a>
-                    <form action="{{ route('noticias.destroy', $noticia->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar la noticia?')">Eliminar</button>
-                    </form>
+                    @auth
+                        <a class="btn btn-sm btn-success" href="{{ route('noticias.edit', $noticia->id) }}">Editar</a>
+                        <form action="{{ route('noticias.destroy', $noticia->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar la noticia?')">Eliminar</button>
+                        </form>
+                    @endauth
                 </div>
             </div>
         </div>

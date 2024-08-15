@@ -12,6 +12,15 @@ use Illuminate\View\View;
 class NoticiaController extends Controller
 {
     /**
+     * Constructor para aplicar middleware
+     */
+    public function __construct()
+    {
+        // Protege las acciones create, store, edit, update, destroy con el middleware auth
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index(Request $request): View
@@ -40,7 +49,7 @@ class NoticiaController extends Controller
         Noticia::create($request->validated());
 
         return Redirect::route('noticias.index')
-            ->with('success', 'Noticia created successfully.');
+            ->with('success', 'Noticia creada con éxito.');
     }
 
     /**
@@ -71,14 +80,17 @@ class NoticiaController extends Controller
         $noticia->update($request->validated());
 
         return Redirect::route('noticias.index')
-            ->with('success', 'Noticia updated successfully');
+            ->with('success', 'Noticia actualizada con éxito.');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy($id): RedirectResponse
     {
         Noticia::find($id)->delete();
 
         return Redirect::route('noticias.index')
-            ->with('success', 'Noticia deleted successfully');
+            ->with('success', 'Noticia eliminada con éxito.');
     }
 }
