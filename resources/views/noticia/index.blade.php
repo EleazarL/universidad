@@ -1,5 +1,6 @@
 @extends('layouts.barranavegacion')
 
+
 <header class="baner-section">
     <img src="{{ asset('assets/fondo-del-inicio.jpg') }}" alt="Hero Image" class="baner-image">    
     <div class="baner-overlay"></div>

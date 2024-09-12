@@ -1,7 +1,5 @@
 @extends('layouts.barranavegacion')
 
-
-
 @section('title', 'Noticias')
 
 <header class="baner-section">
@@ -30,7 +28,7 @@
                                         <h2 class="fw-bolder">ALTA DIRECCIÓN</h2>
                                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius at enim eum illum aperiam placeat esse? Mollitia omnis minima saepe recusandae libero, iste ad asperiores! Explicabo commodi quo itaque! Ipsam!</p>
                                     </div>
-                                    <img class="img-fluid" src="https://dummyimage.com/300x400/343a40/6c757d" alt="..." />
+                                    <iframe src="https://player.vimeo.com/video/796703773?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="300" height="400" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" title="MAESTRIA EN ALTA DIRECCION v2"></iframe>
                                 </div>
                             </div>
                         </div>

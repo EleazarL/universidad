@@ -1,25 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>@yield('barradenavegacion')</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href= "https://scontent.fvsa3-1.fna.fbcdn.net/v/t39.30808-6/424730121_792492029591716_3653845996680493784_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=FIZclJYZ-JwQ7kNvgEU97Fz&_nc_ht=scontent.fvsa3-1.fna&oh=00_AYC7JY8WGnQR3trTE7VlGLmejKxd8IbdDqB4poUpL-5xiA&oe=66B83F0B"/>
-        <!-- Custom Google font-->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
+<html lang="en" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>@yield('title')</title>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Estilos principales -->
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    @yield('extra-styles')
+</head>
 <body>
     <header>
-        <!-- Aquí podrías incluir una barra de navegación -->
+        <!-- Barra de navegación -->
         <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -35,6 +30,31 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('maestrias') }}">MAESTRIAS</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('contacto') }}">CONTACTO</a></li>
                         <li class="nav-item"><a class="nav-link" href="https://cipvirtual.mx" target="_blank">UNIVERSIDAD CIP</a></li>
+                        
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesion') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                        {{ __('Salir') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
                     </ul>
                 </div>
             </div>
